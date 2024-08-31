@@ -28,13 +28,11 @@ const LoginPopup = ({ setShowlogin }) => {
         password: data.password
       });
       if (response.data.success) {
-        toast.success("Login successful");
+       
         setToken(response.data.token);
         localStorage.setItem("token", response.data.token)
         setShowlogin(false);
-      } else {
-        toast.error("Login failed");
-      }
+      } 
     } catch (error) {
       toast.error("Error logging in");
       console.error("Login error: ", error);

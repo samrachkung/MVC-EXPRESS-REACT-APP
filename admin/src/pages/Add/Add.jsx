@@ -8,9 +8,9 @@ const Add = ({ url }) => {
   const [image, setImage] = useState(null);
   const [data, setData] = useState({
     name: "",
-    description: "",
-    price: "",
-    category: "salad"
+    description: "Food provides essential nutrients for overall health and well-being",
+    price: "1",
+    category: ""
   });
 
   const onChangeHandler = (event) => {
@@ -33,9 +33,9 @@ const Add = ({ url }) => {
       if (response.data.success) {
         setData({
           name: "",
-          description: "",
-          price: "",
-          category: "salad"
+          description: "Food provides essential nutrients for overall health and well-being",
+          price: "1",
+          category: ""
         });
         setImage(null);
         toast.success(response.data.message);
@@ -82,7 +82,7 @@ const Add = ({ url }) => {
           </div>
           <div className="add-price flex-col">
             <p>Product Price</p>
-            <input onChange={onChangeHandler} value={data.price} type="number" name='price' placeholder='$20' required />
+            <input onChange={onChangeHandler} value={data.price} type="number" name='price' placeholder='$1' required />
           </div>
         </div>
         <button type='submit' className='add-button'>ADD</button>

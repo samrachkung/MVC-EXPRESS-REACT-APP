@@ -53,13 +53,13 @@ const List = ({ url }) => {
           <b>Price</b>
           <b>Remove item</b>
         </div>
-        {list.map((item, index) => (
+        {list.map((iteam, index) => (
           <div key={index} className='list-table-format'>
-            <img src={`${url}images/${item.image}`} alt={item.name} />
-            <p>{item.name}</p>
-            <p>{item.category}</p>
-            <p>${item.price}</p>
-            <button onClick={() => removeFood(item._id)} className='cursor'>X</button>
+            <img src={`${url}images/${iteam.image}`} alt={iteam.name} />
+            <p>{iteam.name}</p>
+            <p>{iteam.category}</p>
+            <p>${iteam.price}</p>
+            <button onClick={() => removeFood(iteam._id)} className='cursor'>X</button>
           </div>
         ))}
       </div>
