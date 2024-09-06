@@ -77,7 +77,7 @@ const Cart = () => {
                 </div>
               </div>
             </div>
-            <button onClick={()=>navigetive('/order')} style="color=">PROCESS TO CHECKOUT</button>
+            <button  onClick={()=>navigetive('/order')}>PROCESS TO CHECKOUT</button>
           </div>
 
         </div>

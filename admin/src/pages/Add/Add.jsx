@@ -9,7 +9,7 @@ const Add = ({ url }) => {
   const [data, setData] = useState({
     name: "",
     description: "Food provides essential nutrients for overall health and well-being",
-    price: "1",
+    price: "",
     category: ""
   });
 
@@ -34,7 +34,7 @@ const Add = ({ url }) => {
         setData({
           name: "",
           description: "Food provides essential nutrients for overall health and well-being",
-          price: "1",
+          price: "",
           category: ""
         });
         setImage(null);

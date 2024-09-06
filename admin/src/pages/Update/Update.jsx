@@ -15,8 +15,8 @@ const Update = ({ url }) => {
     category: ""
   });
 
+  // Fetch all food items to populate the dropdown
   useEffect(() => {
-    // Fetch all food items to populate the dropdown
     axios.get(`${url}api/food/list`)
       .then(response => {
         setFoods(response.data.data);
@@ -27,20 +27,20 @@ const Update = ({ url }) => {
       });
   }, [url]);
 
+  // Fetch the selected food item data
   useEffect(() => {
     if (foodId) {
-      // Fetch existing food data to pre-fill the form
-      axios.get(`${url}api/food/${foodId}`)
+      axios.get(`${url}api/food/list$`,{id: foodId})
         .then(response => {
           if (response.data && response.data.data) {
             const foodData = response.data.data;
             setData({
               name: foodData.name,
               description: foodData.description,
-              price: foodData.price.toString(),
+              price: foodData.price,
               category: foodData.category
             });
-            setImage(`${url}images/${foodData.image}`); // Set image URL
+            setImage(`${url}images/${foodData.image}`);
           } else {
             toast.error("No data found for the selected food item");
           }
@@ -48,9 +48,6 @@ const Update = ({ url }) => {
         .catch(error => {
           toast.error("Error fetching food data");
           console.error("Fetch error: ", error);
-          if (error.response) {
-            console.error("Response error: ", error.response.data);
-          }
         });
     }
   }, [foodId, url]);
@@ -68,6 +65,8 @@ const Update = ({ url }) => {
     formData.append("description", data.description);
     formData.append("price", Number(data.price));
     formData.append("category", data.category);
+    
+    // Only append image if it's a new file, not if it's a string URL
     if (image && typeof image === 'object') {
       formData.append("image", image);
     }
@@ -107,7 +106,15 @@ const Update = ({ url }) => {
         <div className="update-image-upload flex-col">
           <p>Upload new image (optional)</p>
           <label htmlFor="image">
-            <img src={image ? (typeof image === 'object' ? URL.createObjectURL(image) : image) : assets.upload_area} alt="" />
+            {image && typeof image === 'string' ? (
+              <img src={image} alt={data.name} />
+            ) : (
+              image && typeof image === 'object' ? (
+                <img src={URL.createObjectURL(image)} alt="Preview" />
+              ) : (
+                <img src={assets.upload_area} alt="Upload area" />
+              )
+            )}
           </label>
           <input onChange={(e) => setImage(e.target.files[0])} type="file" id='image' hidden />
         </div>
