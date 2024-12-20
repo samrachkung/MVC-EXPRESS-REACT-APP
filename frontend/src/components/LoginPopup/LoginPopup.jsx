@@ -66,61 +66,61 @@ const LoginPopup = ({ setShowlogin }) => {
   };
 
   return (
-      <div className='login-popup'>
-        <form onSubmit={currState === "Login" ? onLogin : onRegister} className="login-popup-container">
-          <div className="login-popup-title">
-            <h2>{currState}</h2>
-            <img onClick={() => setShowlogin(false)} src={assets.cross_icon} alt="Close" />
-          </div>
-          <div className="login-popup-inputs">
-            {currState === "Sign UP" && (
-                <input
-                    name='name'
-                    onChange={onchangeHandle}
-                    value={data.name}
-                    type="text"
-                    placeholder='Your name'
-                    required
-                />
-            )}
+    <div className='login-popup'>
+      <form onSubmit={currState === "Login" ? onLogin : onRegister} className="login-popup-container">
+        <div className="login-popup-title">
+          <h2>{currState}</h2>
+          <img onClick={() => setShowlogin(false)} src={assets.cross_icon} alt="Close" />
+        </div>
+        <div className="login-popup-inputs">
+          {currState === "Sign UP" && (
             <input
-                name='email'
-                onChange={onchangeHandle}
-                value={data.email}
-                type="email"
-                placeholder='Your email'
-                required
+              name='name'
+              onChange={onchangeHandle}
+              value={data.name}
+              type="text"
+              placeholder='Your name'
+              required
             />
-            <input
-                name='password'
-                onChange={onchangeHandle}
-                value={data.password}
-                type="password"
-                placeholder='Password'
-                required
-            />
-          </div>
-          <button type='submit'>{currState === "Sign UP" ? "Create account" : "Login"}</button>
-          <div className="login-popup-condition">
-            <input
-                type="checkbox"
-                required
-                checked={isChecked}
-                onChange={() => setIsChecked(!isChecked)}
-            />
-            <p>To continue, I agree to the terms of use & privacy policy</p>
-          </div>
-          {currState === "Login" ? (
-              <p>
-                Create new account? <span onClick={() => setCurrState("Sign UP")}>Click here</span>
-              </p>
-          ) : (
-              <p>
-                Already have an account? <span onClick={() => setCurrState("Login")}>Login here</span>
-              </p>
           )}
-        </form>
-      </div>
+          <input
+            name='email'
+            onChange={onchangeHandle}
+            value={data.email}
+            type="email"
+            placeholder='Your email'
+            required
+          />
+          <input
+            name='password'
+            onChange={onchangeHandle}
+            value={data.password}
+            type="password"
+            placeholder='Password'
+            required
+          />
+        </div>
+        <button type='submit'>{currState === "Sign UP" ? "Create account" : "Login"}</button>
+        <div className="login-popup-condition">
+          <input
+            type="checkbox"
+            required
+            checked={isChecked}
+            onChange={() => setIsChecked(!isChecked)}
+          />
+          <p>To continue, I agree to the terms of use & privacy policy</p>
+        </div>
+        {currState === "Login" ? (
+          <p>
+            Create new account? <span onClick={() => setCurrState("Sign UP")}>Click here</span>
+          </p>
+        ) : (
+          <p>
+            Already have an account? <span onClick={() => setCurrState("Login")}>Login here</span>
+          </p>
+        )}
+      </form>
+    </div>
   );
 };
 

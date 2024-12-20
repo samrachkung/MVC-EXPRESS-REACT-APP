@@ -38,7 +38,7 @@ const removeFromCart = async (req, res) => {
 const getCart = async (req, res) => {
     try {
         const userId = req.user.id; // Use the decoded user ID from the token
-        console.log("Decoded user ID:", userId); 
+        console.log("Decoded user ID:", userId);
         const userData = await userModel.findById(userId);
         if (!userData) {
             console.log(userId);

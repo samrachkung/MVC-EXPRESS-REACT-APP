@@ -32,20 +32,20 @@ const MyOrders = () => {
     <div className='my-orders'>
       <h1>My orders</h1>
       <div className="container">
-        {data.map((order,index)=>{
-          return(
+        {data.map((order, index) => {
+          return (
             <div key={index} className="my-orders-orders">
               <img src={assets.parcel_icon} alt="" />
-              <p>{order.items.map((item,index)=>{
-                if (index === order.items.length-1) {
-                  return item.name+" x "+ item.quantity
-                }else{
-                  return item.name+" : have x "+ item.quantity+" , "
+              <p>{order.items.map((item, index) => {
+                if (index === order.items.length - 1) {
+                  return item.name + " x " + item.quantity
+                } else {
+                  return item.name + " : have x " + item.quantity + " , "
                 }
               })}</p>
-             <p>${order.amount}</p>
-             <p><span>&#x25cf;</span> <b>{order.status}</b></p>
-             <button onClick={fetchOrders}>Traking Order</button>
+              <p>${order.amount}</p>
+              <p><span>&#x25cf;</span> <b>{order.status}</b></p>
+              <button onClick={fetchOrders}>Traking Order</button>
             </div>
           )
         })}

@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from "react";
+import React, { createContext, useEffect, useState } from "react";
 import axios from 'axios';
 
 export const StoreContext = createContext(null);
@@ -10,23 +10,23 @@ const StoreContextProvider = (props) => {
     const [food_list, setFoodlist] = useState([])
     const addToCart = async (itemId) => {
         if (!cartItems[itemId]) {
-            setCartItem((prev) => ({...prev, [itemId]: 1}));
+            setCartItem((prev) => ({ ...prev, [itemId]: 1 }));
         } else {
-            setCartItem((prev) => ({...prev, [itemId]: prev[itemId] + 1}));
+            setCartItem((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
         }
         if (token) {
             try {
-                await axios.post(url + "/api/cart/add", {itemId}, {headers: {Authorization: `Bearer ${token}`}});
+                await axios.post(url + "/api/cart/add", { itemId }, { headers: { Authorization: `Bearer ${token}` } });
             } catch (error) {
                 console.error("Error adding to cart:", error);
             }
         }
     };
     const removeFromCart = async (itemId) => {
-        setCartItem((prev) => ({...prev, [itemId]: prev[itemId] - 1}));
+        setCartItem((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
         if (token) {
             try {
-                await axios.post(url + "/api/cart/remove", {itemId}, {headers: {Authorization: `Bearer ${token}`}});
+                await axios.post(url + "/api/cart/remove", { itemId }, { headers: { Authorization: `Bearer ${token}` } });
             } catch (error) {
                 console.error("Error removing from cart:", error);
             }
@@ -64,8 +64,8 @@ const StoreContextProvider = (props) => {
             console.error("Error loading cart data", error);
         }
     };
-    
-    
+
+
     useEffect(() => {
         async function loadData() {
             await fetchFoodlist();
