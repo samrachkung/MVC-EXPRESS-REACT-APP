@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Update from './pages/Update/Update';
 
 const App = () => {
-  const url = "http://localhost:4000/";
+  const url = "http://localhost:4000";
 
   return (
     <div>

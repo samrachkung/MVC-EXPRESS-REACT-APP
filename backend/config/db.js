@@ -1,6 +1,22 @@
-import mongooes from 'mongoose'
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+// Load environment variables from the .env file
+dotenv.config();
 
 export const connectDB = async () => {
-    await mongooes.connect('mongodb+srv://samrach:123@cluster0.wbdd062.mongodb.net/food_delivery_by_rach').then(() =>
-        console.log("huj database connect hx ot error te !!"));
-}
+    const uri = process.env.MONGO_URI;
+
+    if (!uri) {
+        console.error("MongoDB URI is undefined. Check your environment variables.");
+        process.exit(1); // Exit the process with failure code
+    }
+
+    try {
+        await mongoose.connect(uri);
+        console.log("huj database connect hx ot error te !!");
+    } catch (error) {
+        console.error("Error connecting to the database:", error.message);
+        process.exit(1); // Exit the process with failure code
+    }
+};

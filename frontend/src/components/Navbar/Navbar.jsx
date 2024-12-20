@@ -6,15 +6,13 @@ import { StoreContext } from '../../Context/StoreContext';
 
 const Navbar = ({ setShowlogin }) => {
   const [menu, setMenu] = useState("home");
-  const { getTotatalAmount, token, setToken } = useContext(StoreContext);
+  const { getTotalAmount, token, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
-
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
     navigate("/");
   };
-
   return (
     <div className='navbar'>
       <Link to='/'><img src={assets.logo} alt="Logo" className="logo" /></Link>
@@ -28,7 +26,7 @@ const Navbar = ({ setShowlogin }) => {
         <img src={assets.search_icon} alt="Search" />
         <div className="navbar-search-icon">
           <Link to='/cart'><img src={assets.basket_icon} alt="Cart" /></Link>
-          <div className={getTotatalAmount() === 0 ? "" : "dot"}></div>
+          <div className={getTotalAmount() === 0 ? "" : "dot"}></div>
         </div>
         {!token ? (
           <button onClick={() => setShowlogin(true)}>Sign in</button>
@@ -36,7 +34,7 @@ const Navbar = ({ setShowlogin }) => {
           <div className="navbar-profile">
             <img src={assets.profile_icon} alt="Profile" />
             <ul className="nav-profile-dropdown">
-              <li>
+              <li onClick={()=>navigate('/myorder')}>
                 <img src={assets.bag_icon} alt="Orders" />
                 <p>Orders</p>
               </li>

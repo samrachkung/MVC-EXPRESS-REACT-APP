@@ -5,11 +5,8 @@ import { toast } from 'react-toastify';
 
 const List = ({ url }) => {
   const [list, setList] = useState([]);
-
-  const fetchList = async () => {
-    const endpoint = "api/food/list";  
-    const requestUrl = `${url}${endpoint}`; 
-
+  const fetchList = async () => {const endpoint = "/api/food/list";
+    const requestUrl = `${url}${endpoint}`;
     try {
       const response = await axios.get(requestUrl);
       if (response.data.success) {
@@ -22,14 +19,12 @@ const List = ({ url }) => {
       console.error("Fetch error: ", error);
     }
   };
-
   useEffect(() => {
     fetchList();
   }, []);
-
   const removeFood = async (foodId) => {
     try {
-      const response = await axios.post(`${url}api/food/remove`, { id: foodId });
+      const response = await axios.post(`${url}/api/food/remove`, { id: foodId });
       if (response.data.success) {
         toast.success("Food item removed");
         fetchList();
@@ -55,7 +50,7 @@ const List = ({ url }) => {
         </div>
         {list.map((iteam, index) => (
           <div key={index} className='list-table-format'>
-            <img src={`${url}images/${iteam.image}`} alt={iteam.name} />
+            <img src={`${url}/images/${iteam.image}`} alt={iteam.name} />
             <p>{iteam.name}</p>
             <p>{iteam.category}</p>
             <p>${iteam.price}</p>

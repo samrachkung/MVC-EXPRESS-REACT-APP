@@ -4,13 +4,18 @@ import path from 'path';
 
 // Add food
 const addFood = async (req, res) => {
-    let image_filename = req.file.filename;
+    console.log("Request Body: ", req.body); // Debugging log
+    console.log("Request File: ", req.file); // Debugging log for uploaded file
+
+    if (!req.body.name || !req.body.category || !req.file) {
+        return res.json({ success: false, message: "All fields are required!" });
+    }
 
     const food = new foodModel({
         name: req.body.name,
-        description: req.body.description, 
+        description: req.body.description,
         price: req.body.price,
-        image: image_filename,
+        image: req.file.filename,
         category: req.body.category
     });
 
@@ -28,20 +33,14 @@ const updateFood = async (req, res) => {
     try {
         const food = await foodModel.findById(req.body.id);
         if (food) {
-            // Delete the old image if a new one is provided
             if (req.file && req.file.filename) {
                 const oldFilePath = path.join('upload', food.image);
                 fs.unlink(oldFilePath, (err) => {
-                    if (err) {
-                        console.error(`Error deleting file: ${oldFilePath}`, err);
-                    } else {
-                        console.log(`Old file deleted: ${oldFilePath}`);
-                    }
+                    if (err) console.error(`Error deleting file: ${oldFilePath}`, err);
                 });
-                food.image = req.file.filename; // Update image filename
+                food.image = req.file.filename;
             }
 
-            // Update other fields
             food.name = req.body.name || food.name;
             food.description = req.body.description || food.description;
             food.price = req.body.price || food.price;
@@ -76,11 +75,7 @@ const removeFood = async (req, res) => {
         if (food) {
             const filePath = path.join('upload', food.image);
             fs.unlink(filePath, (err) => {
-                if (err) {
-                    console.error(`Error deleting file: ${filePath}`, err);
-                } else {
-                    console.log(`File deleted: ${filePath}`);
-                }
+                if (err) console.error(`Error deleting file: ${filePath}`, err);
             });
             await foodModel.findByIdAndDelete(req.body.id);
             res.json({ success: true, message: "Food removed!" });

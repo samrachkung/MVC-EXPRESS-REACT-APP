@@ -17,7 +17,7 @@ const Update = ({ url }) => {
 
   // Fetch all food items to populate the dropdown
   useEffect(() => {
-    axios.get(`${url}api/food/list`)
+    axios.get(`${url}/api/food/list`)
       .then(response => {
         setFoods(response.data.data);
       })
@@ -30,7 +30,7 @@ const Update = ({ url }) => {
   // Fetch the selected food item data
   useEffect(() => {
     if (foodId) {
-      axios.get(`${url}api/food/list$`,{id: foodId})
+      axios.get(`${url}/api/food/list$`,{id: foodId})
         .then(response => {
           if (response.data && response.data.data) {
             const foodData = response.data.data;
@@ -40,7 +40,7 @@ const Update = ({ url }) => {
               price: foodData.price,
               category: foodData.category
             });
-            setImage(`${url}images/${foodData.image}`);
+            setImage(`${url}/images/${foodData.image}`);
           } else {
             toast.error("No data found for the selected food item");
           }
@@ -72,7 +72,7 @@ const Update = ({ url }) => {
     }
 
     try {
-      const response = await axios.put(`${url}api/food/update/${foodId}`, formData, {
+      const response = await axios.put(`${url}/api/food/update/${foodId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

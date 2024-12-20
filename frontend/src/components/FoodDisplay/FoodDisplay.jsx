@@ -8,9 +8,9 @@ const FoodDisplay = ({ category }) => {
         <div className='food-display' id='food-display'>
             <h2>Top dishes near you</h2>
             <div className="food-display-list">
-                {food_list.map((iteam, index) => {
-                    if (category === "ALL" || category === iteam.category) {
-                        return <Fooditeam key={index} id={iteam._id} name={iteam.name} price={iteam.price} description={iteam.description} image={iteam.image} />
+                {food_list.map((item, index) => {
+                    if (category === "ALL" || category === item.category) {
+                        return <Fooditeam key={index} id={item._id} name={item.name} price={item.price} description={item.description} image={item.image} />
                     }
                 })}
             </div>
